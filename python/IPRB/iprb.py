@@ -1,6 +1,6 @@
 import sys
 
-# https://rosalind.info/problems/subs/
+# https://rosalind.info/problems/iprb/
 
 # opening the file
 if len(sys.argv) == 2:
