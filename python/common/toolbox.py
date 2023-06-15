@@ -1,5 +1,6 @@
 
 # Toolbox is a set of utility methods to process DNA related sequences
+from collections import defaultdict
 
 #
 ## Lookup tables
@@ -28,6 +29,11 @@ codontab = {
 # DNA complementation
 compltab = {"A" : "T", "T" : "A", "G": "C", "C": "G"}
 
+# calculated from multiplicity
+codonmult = {'S': 6, 'F': 2, 'L': 6, 'Y': 2, '*': 3, 'C': 2, 'W': 1, 'P': 4,
+           'H': 2, 'Q': 2, 'R': 6, 'I': 3, 'M': 1, 'T': 4, 'N': 2, 'K': 2,
+           'V': 4, 'A': 4, 'D': 2, 'E': 2, 'G': 4}
+
 
 #
 ## File operations
@@ -35,7 +41,7 @@ compltab = {"A" : "T", "T" : "A", "G": "C", "C": "G"}
 
 # Read a file with multiple sequences in fasta format
 def readfasta(filename):
-    files = -1
+    files = 0
     names = []
     strings = []
 
@@ -45,7 +51,7 @@ def readfasta(filename):
     tmp = ''
     for l in lines:
         if l[0] == '>':
-            if files != -1:
+            if files != 0:
                 strings.append(tmp)
             names.append(l[1:])
             files += 1
@@ -87,6 +93,19 @@ def revcompl(nuclseq):
 ## Codon functions
 #
 
+def multiplicity():
+    s = set()
+    d = {}
+    for t in codontab:
+        amino = codontab[t]
+        if amino in s:
+            d[amino] += 1
+        else:
+            s.add(amino)
+            d[amino] = 1
+    print(d)
+
+
 # Is this a DNA START codon?
 def is_start(seq):
     return seq == 'ATG'
@@ -116,6 +135,14 @@ def aminoseq(nuclseq):
 ## Slightly advanced
 #
 
+def delintron(string, intron):
+    i = string.find(intron)
+    if i == -1:
+        return string
+    s1 = string[:i]
+    s2 = string[i+len(intron):]
+    return s1 + s2
+
 
 # Given a DNA nucleotide sequence string, return the amino acid sequence
 # between the first START codon (included) and the first STOP codon (excluded)
@@ -137,5 +164,3 @@ def openframe(nuclseq):
                 else:
                     s += amino(codon)
     return ''
-
-    

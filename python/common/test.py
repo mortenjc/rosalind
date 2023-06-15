@@ -19,4 +19,6 @@ assert tb.revcompl('ATCG') == 'CGAT'
 assert tb.startcodons('ATGGGGATG') == [0, 6]
 
 assert tb.openframe('ATGGGGTAA') == "MG" # START/M GGG/G STOP
-assert tb.openframe('ATGGGG') == "" # START/M GGG/G 
+assert tb.openframe('ATGGGG') == "" # START/M GGG/G
+
+assert tb.delintron('ABCDEFGHI', 'DEF') == 'ABCGHI'
