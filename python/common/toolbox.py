@@ -1,50 +1,37 @@
 
+# Toolbox is a set of utility methods to process DNA related sequences
 
+#
+## Lookup tables
+#
 
-
+# DNA codons -> Amino acids
 codontab = {
-    'TCA': 'S',    'TCC': 'S',    'TCG': 'S',    'TCT': 'S',
-    'TTC': 'F',    'TTT': 'F',    'TTA': 'L',    'TTG': 'L',
-    'TAC': 'Y',    'TAT': 'Y',    'TAA': '*',    'TAG': '*',
-    'TGC': 'C',    'TGT': 'C',    'TGA': '*',    'TGG': 'W',
-    'CTA': 'L',    'CTC': 'L',    'CTG': 'L',    'CTT': 'L',
-    'CCA': 'P',    'CCC': 'P',    'CCG': 'P',    'CCT': 'P',
-    'CAC': 'H',    'CAT': 'H',    'CAA': 'Q',    'CAG': 'Q',
-    'CGA': 'R',    'CGC': 'R',    'CGG': 'R',    'CGT': 'R',
-    'ATA': 'I',    'ATC': 'I',    'ATT': 'I',    'ATG': 'M',
-    'ACA': 'T',    'ACC': 'T',    'ACG': 'T',    'ACT': 'T',
-    'AAC': 'N',    'AAT': 'N',    'AAA': 'K',    'AAG': 'K',
-    'AGC': 'S',    'AGT': 'S',    'AGA': 'R',    'AGG': 'R',
-    'GTA': 'V',    'GTC': 'V',    'GTG': 'V',    'GTT': 'V',
-    'GCA': 'A',    'GCC': 'A',    'GCG': 'A',    'GCT': 'A',
-    'GAC': 'D',    'GAT': 'D',    'GAA': 'E',    'GAG': 'E',
-    'GGA': 'G',    'GGC': 'G',    'GGG': 'G',    'GGT': 'G'
+    'TCA': 'S', 'TCC': 'S', 'TCG': 'S', 'TCT': 'S',
+    'TTC': 'F', 'TTT': 'F', 'TTA': 'L', 'TTG': 'L',
+    'TAC': 'Y', 'TAT': 'Y', 'TAA': '*', 'TAG': '*',
+    'TGC': 'C', 'TGT': 'C', 'TGA': '*', 'TGG': 'W',
+    'CTA': 'L', 'CTC': 'L', 'CTG': 'L', 'CTT': 'L',
+    'CCA': 'P', 'CCC': 'P', 'CCG': 'P', 'CCT': 'P',
+    'CAC': 'H', 'CAT': 'H', 'CAA': 'Q', 'CAG': 'Q',
+    'CGA': 'R', 'CGC': 'R', 'CGG': 'R', 'CGT': 'R',
+    'ATA': 'I', 'ATC': 'I', 'ATT': 'I', 'ATG': 'M',
+    'ACA': 'T', 'ACC': 'T', 'ACG': 'T', 'ACT': 'T',
+    'AAC': 'N', 'AAT': 'N', 'AAA': 'K', 'AAG': 'K',
+    'AGC': 'S', 'AGT': 'S', 'AGA': 'R', 'AGG': 'R',
+    'GTA': 'V', 'GTC': 'V', 'GTG': 'V', 'GTT': 'V',
+    'GCA': 'A', 'GCC': 'A', 'GCG': 'A', 'GCT': 'A',
+    'GAC': 'D', 'GAT': 'D', 'GAA': 'E', 'GAG': 'E',
+    'GGA': 'G', 'GGC': 'G', 'GGG': 'G', 'GGT': 'G'
 }
 
-comptab = {"A" : "T", "T" : "A", "G": "C", "C": "G"}
+# DNA complementation
+compltab = {"A" : "T", "T" : "A", "G": "C", "C": "G"}
 
 
-def amino(seq):
-    assert len(seq) == 3
-    return codontab[seq]
-
-
-def is_start(seq):
-    return seq == 'AUG' or seq == 'ATG'
-
-
-def is_stop(seq):
-    return codontab[seq] == '*'
-
-
-def startpositions(string):
-    pos = []
-    for i in range(0, len(string), 3):
-        cod = string[i:i+3]
-        if is_start(cod):
-            pos.append(i)
-    return pos
-
+#
+## File operations
+#
 
 # Read a file with multiple sequences in fasta format
 def readfasta(filename):
@@ -68,28 +55,87 @@ def readfasta(filename):
     strings.append(tmp)
     return files, names, strings
 
+#
+## Simple 'string' functions
+#
 
-# reverse a sequence string
-def revseq(string):
-    return string[::-1]
+# Reverse a string sequence
+def revseq(stringseq):
+    return stringseq[::-1]
 
 
-def compl(string):
+# Return the amino acid for a DNA nucleotide sequence
+def amino(nuclseq):
+    assert len(nuclseq) == 3
+    return codontab[nuclseq]
+
+# Return the complement to a DNA sequence
+def compl(nuclseq):
     s=''
-    for i in range(len(string)):
-        s+= comptab[string[i]]
+    for i in range(len(nuclseq)):
+        s+= compltab[nuclseq[i]]
     return s
 
-
-def revcompl(string):
+#Return the reversed complement to a DNA sequence
+def revcompl(nuclseq):
     s=''
-    for i in range(len(string)):
-        s+= comptab[string[i]]
+    for i in range(len(nuclseq)):
+        s+= compltab[nuclseq[i]]
     return revseq(s)
 
+#
+## Codon functions
+#
 
-def aminoseq(dnastr):
+# Is this a DNA START codon?
+def is_start(seq):
+    return seq == 'ATG'
+
+# Is this s DNA STOP codon?
+def is_stop(seq):
+    return codontab[seq] == '*'
+
+# Return a list, possibly empty, of indexes for START codons
+def startcodons(nuclseq):
+    pos = []
+    for i in range(0, len(nuclseq), 3):
+        cod = nuclseq[i:i+3]
+        if is_start(cod):
+            pos.append(i)
+    return pos
+
+# Given a DNA nucleotide sequence string, return the amino acid sequence
+def aminoseq(nuclseq):
     s = ''
-    for i in range(0, len(dnastr), 3):
-        s += amino(dnastr[i:i+3])
+    for i in range(0, len(nuclseq), 3):
+        s += amino(nuclseq[i:i+3])
     return s
+
+
+#
+## Slightly advanced
+#
+
+
+# Given a DNA nucleotide sequence string, return the amino acid sequence
+# between the first START codon (included) and the first STOP codon (excluded)
+def openframe(nuclseq):
+    state = 0 # 0 initial, 1 started, 2 stopped
+    s = ''
+    for i in range(0, len(nuclseq), 3):
+        codon = nuclseq[i:i+3]
+        if len(codon) != 3:
+            break
+        if state == 0:
+            if is_start(codon):
+                state = 1
+                s = amino(codon)
+                continue
+        elif state == 1:
+                if is_stop(codon):
+                    return s
+                else:
+                    s += amino(codon)
+    return ''
+
+    
