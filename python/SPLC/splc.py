@@ -1,14 +1,11 @@
 import sys
 sys.path.append('../common')
 import toolbox as tb
+import files as f
 
 
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    filename = 'test.txt'
-
-n, names, strings = tb.readfasta(filename)
+filename = f.filefromargv(sys.argv)
+n, names, strings = f.readfasta(filename)
 #print(n, names, strings)
 
 s = strings[0]

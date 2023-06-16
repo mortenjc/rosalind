@@ -1,15 +1,12 @@
 import sys
 sys.path.append('../common')
 import toolbox as tb
+import files as f
 
 # https://rosalind.info/problems/orf
 
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    filename = 'test.txt'
-
-n, names, strings = tb.readfasta(filename)
+filename = f.filefromargv(sys.argv)
+n, names, strings = f.readfasta(filename)
 
 
 def orf(sequence):
@@ -17,8 +14,6 @@ def orf(sequence):
     for i in range(3):
         seq = sequence[i:]
         starts = tb.startcodons(seq)
-        # if len(starts) == 0:
-        #     continue
         for j in starts:
             tmp = tb.openframe(seq[j:])
             if tmp != '':

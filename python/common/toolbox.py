@@ -36,32 +36,6 @@ codonmult = {'S': 6, 'F': 2, 'L': 6, 'Y': 2, '*': 3, 'C': 2, 'W': 1, 'P': 4,
 
 
 #
-## File operations
-#
-
-# Read a file with multiple sequences in fasta format
-def readfasta(filename):
-    files = 0
-    names = []
-    strings = []
-
-    f = open(filename, "r")
-    data = f.read()
-    lines = data.splitlines()
-    tmp = ''
-    for l in lines:
-        if l[0] == '>':
-            if files != 0:
-                strings.append(tmp)
-            names.append(l[1:])
-            files += 1
-            tmp =''
-        else:
-            tmp += l
-    strings.append(tmp)
-    return files, names, strings
-
-#
 ## Simple 'string' functions
 #
 
