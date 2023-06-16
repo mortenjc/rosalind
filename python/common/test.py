@@ -1,4 +1,5 @@
 import toolbox as tb
+import strings as s
 
 assert tb.is_start('ATG')
 assert not tb.is_start('AUG') # not for RNA
@@ -22,3 +23,7 @@ assert tb.openframe('ATGGGGTAA') == "MG" # START/M GGG/G STOP
 assert tb.openframe('ATGGGG') == "" # START/M GGG/G
 
 assert tb.delintron('ABCDEFGHI', 'DEF') == 'ABCGHI'
+
+assert s.substrings('') == []
+assert s.substrings('AB') == ['AB']
+assert s.substrings('ABC') == ['AB', 'BC', 'ABC']
