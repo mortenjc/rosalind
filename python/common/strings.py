@@ -1,6 +1,12 @@
 
 # Toolbox is a set of utility methods to process DNA related sequences
 
+
+# Reverse a string
+def reverse(stringseq):
+    return stringseq[::-1]
+
+
 # generate all substrings of a string
 def substrings(string):
     l = len(string)

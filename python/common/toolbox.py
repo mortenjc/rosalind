@@ -1,6 +1,6 @@
 
 # Toolbox is a set of utility methods to process DNA related sequences
-from collections import defaultdict
+import strings
 
 #
 ## Lookup tables
@@ -39,10 +39,6 @@ codonmult = {'S': 6, 'F': 2, 'L': 6, 'Y': 2, '*': 3, 'C': 2, 'W': 1, 'P': 4,
 ## Simple 'string' functions
 #
 
-# Reverse a string sequence
-def revseq(stringseq):
-    return stringseq[::-1]
-
 
 # Return the amino acid for a DNA nucleotide sequence
 def amino(nuclseq):
@@ -61,7 +57,7 @@ def revcompl(nuclseq):
     s=''
     for i in range(len(nuclseq)):
         s+= compltab[nuclseq[i]]
-    return revseq(s)
+    return strings.reverse(s)
 
 #
 ## Codon functions
