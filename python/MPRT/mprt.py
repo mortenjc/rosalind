@@ -71,4 +71,4 @@ for prot in lines:
             res += f'{i+1} '
     if res != '':
         print(prot)
-        print(res)
+        print(res[:-1])

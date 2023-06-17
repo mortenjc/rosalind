@@ -10,7 +10,7 @@ def filefromargv(argv):
     return filename
 
 # Read the file and return lines as a list
-def readlines(string):
+def readlines(filename):
     f = open(filename, "r")
     data = f.read()
     lines = data.splitlines()
