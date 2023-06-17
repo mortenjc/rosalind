@@ -26,4 +26,8 @@ assert tb.delintron('ABCDEFGHI', 'DEF') == 'ABCGHI'
 
 assert s.substrings('') == []
 assert s.substrings('AB') == ['AB']
-assert s.substrings('ABC') == ['AB', 'BC', 'ABC']
+print(s.substrings('ABC'))
+assert s.substrings('ABC') == ['AB', 'ABC', 'BC']
+assert s.substrings('AAAA') == ['AA', 'AAA', 'AAAA']
+
+assert s.findall('AAABBAAAABAAA', 'AAA') == [1,6,7,11]
