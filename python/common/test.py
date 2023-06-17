@@ -10,8 +10,6 @@ assert tb.is_stop('TAG')
 assert tb.is_stop('TGA')
 assert tb.is_stop('TAA')
 
-
-
 assert tb.aminoseq('ATGAAATAG') == 'MK*'
 
 assert tb.compl('ATCG') == 'TAGC'
@@ -35,8 +33,10 @@ assert s.substrings('AAAA') == ['AA', 'AAA', 'AAAA']
 
 assert s.findall('AAABBAAAABAAA', 'AAA') == [1,6,7,11]
 
-assert il.long_incr_sseq([1]) == 1
-assert il.long_incr_sseq([1,2]) == 2
-assert il.long_incr_sseq(range(700)) == 700
-assert il.long_incr_sseq(range(700)[::-1]) == 1
-assert il.long_incr_sseq([8,3,4,6,5,2,0,7,9,1]) == 5
+assert len(il.long_incr_sseq([1])) == 1
+assert len(il.long_incr_sseq([1,2])) == 2
+assert len(il.long_incr_sseq(range(700))) == 700
+assert len(il.long_incr_sseq(range(700)[::-1])) == 1
+assert len(il.long_incr_sseq([8,3,4,6,5,2,0,7,9,1])) == 5
+assert il.long_incr_sseq([8,3,4,6,5,2,0,7,9,1]) == [3,4,6,7,9]
+assert il.long_incr_sseq(range(700)) == list(range(700))
