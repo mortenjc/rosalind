@@ -40,6 +40,12 @@ codonmult = {'S': 6, 'F': 2, 'L': 6, 'Y': 2, '*': 3, 'C': 2, 'W': 1, 'P': 4,
 #
 
 
+def aminostat(seq):
+    s = {'A':0, 'T':0, 'G':0, 'C':0, 'U':0}
+    for i in seq:
+        s[i] += 1
+    return s
+
 # Return the amino acid for a DNA nucleotide sequence
 def amino(nuclseq):
     assert len(nuclseq) == 3

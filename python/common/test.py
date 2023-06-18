@@ -23,6 +23,13 @@ assert tb.openframe('ATGGGG') == "" # START/M GGG/G
 
 assert tb.delintron('ABCDEFGHI', 'DEF') == 'ABCGHI'
 
+
+r = tb.aminostat('ATCGUGCAT')
+assert r['A'] == 2
+assert r['T'] == 2
+assert r['C'] == 2
+assert r['U'] == 1
+
 assert s.reverse('ABCD') == 'DCBA'
 assert s.reverse('NETROM') == 'MORTEN'
 
@@ -33,10 +40,11 @@ assert s.substrings('AAAA') == ['AA', 'AAA', 'AAAA']
 
 assert s.findall('AAABBAAAABAAA', 'AAA') == [1,6,7,11]
 
-assert len(il.long_incr_sseq([1])) == 1
-assert len(il.long_incr_sseq([1,2])) == 2
-assert len(il.long_incr_sseq(range(700))) == 700
-assert len(il.long_incr_sseq(range(700)[::-1])) == 1
-assert len(il.long_incr_sseq([8,3,4,6,5,2,0,7,9,1])) == 5
-assert il.long_incr_sseq([8,3,4,6,5,2,0,7,9,1]) == [3,4,6,7,9]
-assert il.long_incr_sseq(range(700)) == list(range(700))
+assert len(il.long_sseq([1])) == 1
+assert len(il.long_sseq([1,2])) == 2
+assert len(il.long_sseq(range(700))) == 700
+assert len(il.long_sseq(range(700)[::-1])) == 1
+assert len(il.long_sseq([8,3,4,6,5,2,0,7,9,1])) == 5
+assert il.long_sseq([8,3,4,6,5,2,0,7,9,1]) == [3,4,6,7,9]
+assert il.long_sseq(range(700)) == list(range(700))
+assert il.long_sseq([10, 20, 2, 5, 3, 8, 8, 25, 6]) == [2, 5, 8, 25]
