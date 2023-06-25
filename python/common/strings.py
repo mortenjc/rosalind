@@ -32,6 +32,39 @@ def findall(string, pattern):
     return pos
 
 
+# Count the number of contiguous matches between two strings
+# where s2 is 'offset' from s1 by a specified amount
+#
+# For example: (ABCDEF, 3, DEFXYZ) has three overlaps (DEF) at offset 3
+#    ABCDEF
+#       DEFXYZ
+def contiguous_matches(s1, offset, s2):
+    matches = 0
+    #print(s1, offset, s2)
+    minlen = min(len(s1) - offset, len(s2))
+    #print('minlen', minlen)
+    for i in range(minlen):
+        #print(i, s1[i+offset], s2[i])
+        if s1[i + offset] != s2[i]:
+            break
+        else:
+            matches += 1
+    return matches
+
+
+# find the longest overlap between two strings s1 and s2
+# returns the index of the overlap and the size
+def longest_overlap(s1, s2):
+    longest = 0
+    longesti = 0
+    for i in range(len(s1)):
+        ovlcount = contiguous_matches(s1, i, s2)
+        if ovlcount > longest:
+            longest = ovlcount
+            longesti = i
+
+    return (longesti, longest)
+
 
 
 # check if pattern occurs in a list of strings
