@@ -49,8 +49,8 @@ def gt(s, t, ati):
         i2 = strtoint(tp, ati)
         return i1 > i2
 
-assert gt('DD', 'D', tmp)
-assert not gt('DDD', 'DDD', tmp)
+#assert gt('DD', 'D', tmp)
+#assert not gt('DDD', 'DDD', tmp)
 
 def atostr(a, ita):
     res = ''
@@ -58,6 +58,9 @@ def atostr(a, ita):
         assert isinstance(i, int)
         res += ita[i]
     return res
+
+
+
 #
 # #
 #
@@ -87,22 +90,24 @@ print(n)
 
 orgstr = []
 for l in range(1,n+1):
-    print(f'l {l}')
+    #print(f'l {l}')
     ntot = len(alp)**l
-    print(f'ntot {ntot}')
+    #print(f'ntot {ntot}')
     a = [0 for i in range(l)]
     tmp = atostr(a, ita)[::-1]
-    print(tmp)
+    #print(tmp)
     orgstr.append(tmp)
     for i in range(ntot - 1):
         a = addone(a,len(alp))
         tmp = atostr(a, ita)[::-1]
-        print(tmp)
+        #print(tmp)
         orgstr.append(tmp)
 
-print(orgstr)
+#print(orgstr)
 n2 = len(orgstr)
-print(n2)
+#print(n2)
+
+print('sorting... please wait (use pypy and wait a little shorter)')
 
 
 for i in range(n2):
