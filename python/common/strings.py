@@ -91,3 +91,12 @@ def permutations(lst):
         for p in permutations(remlst):
             l.append(m + p)
     return l
+
+
+# return a list of floats from a line
+def tofloat(str, sep=' '):
+    return list(map(float, str.split(sep)))
+
+# return a list of ints from a line
+def toint(str, sep=' '):
+    return list(map(int, str.split(sep)))

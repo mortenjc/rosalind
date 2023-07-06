@@ -1,25 +1,28 @@
-import sys, math
+import sys, math, re
 sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
 import stats as st
 
+# https://rosalind.info/problems/afrq
+
+
 #
 # #
 #
 
-
 filename = f.filefromargv(sys.argv)
 #n, names, strings = f.readfasta(filename)
-#print(n, names, strings)
 lines = f.readlines(filename)
 
-a = int(lines[0].split()[0])
-b = int(lines[0].split()[1])
-print(a,b)
+assert len(lines) == 1
 
-n = 2**a
-k = b
-res =st.berni(n,k, 0.25)
-print(f'{res:3.3}')
+vals = s.tofloat(lines[0])
+
+print(vals)
+
+res = []
+for p in vals:
+    res.append(f'{st.berni(2,1,math.sqrt(p)):.3f}')
+print(' '.join(res))

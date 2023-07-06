@@ -3,11 +3,7 @@ sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
-
-def bern(n, k, p):
-    assert p <= 1.0
-    q = 1.0 - p
-    return math.comb(n,k)* p**k * q**(n-k)
+import stats as st
 
 #
 # #
@@ -27,7 +23,7 @@ r = []
 for i in range(1, 2*n+1):
     res = 0.0
     for j in range(i, 2*n+1):
-        res += bern(2*n,j,p)
+        res += st.bern(2*n,j,p)
     r.append(f'{math.log10(res):.3f}')
     print(f'{i} {res:.3f} {math.log10(res):.4f}')
 

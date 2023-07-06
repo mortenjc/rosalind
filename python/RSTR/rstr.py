@@ -3,13 +3,10 @@ sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
+import stats as st
 
 # https://rosalind.info/problems/rstr
 
-def bern(n, k, p):
-    assert p <= 1.0
-    q = 1.0 - p
-    return math.comb(n,k)* p**k * q**(n-k)
 
 #
 # #
@@ -47,6 +44,6 @@ print(' '.join(map(str, res)))
 p = newp
 res = 0.0
 for i in range(1, 50):
-    res += bern(N,i,p)
+    res += st.bern(N,i,p)
 
 print(res)
