@@ -24,7 +24,7 @@ def maj(line, n):
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(filename)
+#n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 k, n = list(map(int,lines[0].split()))

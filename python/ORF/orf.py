@@ -6,7 +6,8 @@ import files as f
 # https://rosalind.info/problems/orf
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
+lines = f.readlines(filename)
+n, names, strings = f.readfasta(lines)
 
 
 def orf(sequence):

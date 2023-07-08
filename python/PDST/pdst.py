@@ -22,8 +22,9 @@ assert abs(dist('ABC', 'ACC') - 0.3333) < 0.0001
 
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
-#lines = f.readlines(filename)
+lines = f.readlines(filename)
+n, names, strings = f.readfasta(lines)
+
 for i in range(n):
     dists = []
     for j in range(n):

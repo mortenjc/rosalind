@@ -12,8 +12,8 @@ def search(patt, string):
     return False
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
-#lines = f.readlines(filename)
+lines = f.readlines(filename)
+n, names, strings = f.readfasta(lines)
 
 assert n == 2
 

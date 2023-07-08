@@ -42,7 +42,7 @@ def nonx_perf_bond(seq):
 #
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
+n, names, strings = f.readfasta(lines)
 #lines = f.readlines(filename)
 assert n == 1
 print(strings[0])

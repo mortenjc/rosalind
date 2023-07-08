@@ -18,7 +18,7 @@ def tree_to_list(tree):
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(filename)
+#n, names, strings = f.readfasta(lines)
 #lines = f.readlines(filename)
 all = Path(filename).read_text()
 

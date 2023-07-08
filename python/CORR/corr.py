@@ -30,8 +30,9 @@ assert point_mutation('ATA', 'TAT') == -1
 #
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
-#lines = f.readlines(filename)
+lines = f.readlines(filename)
+n, names, strings = f.readfasta(lines)
+
 
 good = []
 seen = set()

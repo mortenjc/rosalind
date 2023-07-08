@@ -10,7 +10,7 @@ import strings as s
 #
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(filename)
+#n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 V, E = map(int, lines[0].split(' '))

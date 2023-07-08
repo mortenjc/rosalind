@@ -6,7 +6,8 @@ import strings as s
 
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
+lines = f.readlines(filename)
+n, names, strings = f.readfasta(lines)
 #print(n, names, strings)
 
 assert n == 2

@@ -24,7 +24,8 @@ assert permutations('A') == ['A']
 assert permutations('AB') == ['AB', 'BA']
 
 filename = f.filefromargv(sys.argv)
-n, names, strings = f.readfasta(filename)
+lines = f.readlines(filename)
+n, names, strings = f.readfasta(lines)
 #print(n, names, strings)
 
 val = int(strings[0])

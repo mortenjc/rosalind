@@ -11,7 +11,7 @@ import stats as st
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(filename)
+#n, names, strings = f.readfasta(lines)
 #print(n, names, strings)
 lines = f.readlines(filename)
 

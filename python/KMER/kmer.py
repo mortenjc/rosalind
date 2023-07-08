@@ -24,8 +24,9 @@ def itoa(i, k, l):
 #
 
 filename = f.filefromargv(sys.argv)
-n, names, seqs = f.readfasta(filename)
 lines = f.readlines(filename)
+n, names, seqs = f.readfasta(lines)
+
 
 assert n == 1
 
