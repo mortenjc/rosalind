@@ -111,6 +111,7 @@ def aminoseq(nuclseq):
 ## Slightly advanced
 #
 
+# Actually delete a substring, no checking for DNA/RNA validity
 def delintron(string, intron):
     i = string.find(intron)
     if i == -1:
