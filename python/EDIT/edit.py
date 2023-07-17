@@ -3,12 +3,33 @@ sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
+import numpy as np
 
 sys.setrecursionlimit(10000)
 
 # https://rosalind.info/problems/edit
 
+# Levenstein distance adapted to pythonm from
+# https://en.wikipedia.org/wiki/Levenshtein_distance
+def mineditlen(s, t):
+    m = len(s)
+    n = len(t)
+    C = np.ndarray((m+1, n+1))
+    for i in range(m+1):
+        C[i,0] = i
+    for j in range(n+1):
+        C[0,j] = j
 
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s[i-1] == t[j-1]:
+                substcost = 0
+            else:
+                substcost = 1
+
+            C[i,j] = min(C[i-1,j]+1, C[i,j-1]+1, C[i-1,j-1] + substcost)
+
+    return C, C[m,n]
 #
 # #
 #
@@ -27,12 +48,6 @@ s2 = seqs[1]
 n=len(s2)
 print(f's1 len: {len(s1)}')
 print(f's2 len: {len(s2)}')
-c, l = s.lcs_length(s1,s2)
+c, l = mineditlen(s1,s2)
 print('len:', l)
-lcs = s.lcs_backtrack(c, s1, s2, m, n)
-
-print(f'delete {m-l} from s1 to get')
-print(lcs)
-print(f'add {n-l} to lcs get s2')
-
-print(max(n-l, m-l))
+#print(c)
