@@ -7,7 +7,7 @@ import numpy as np
 
 sys.setrecursionlimit(10000)
 
-# https://rosalind.info/problems/edit
+# https://rosalind.info/problems/glob
 
 # Levenstein distance adapted to pythonm from
 # https://en.wikipedia.org/wiki/Levenshtein_distance
@@ -16,17 +16,16 @@ def mineditlen(s, t):
     n = len(t)
     C = np.ndarray((m+1, n+1))
     for i in range(m+1):
-        C[i,0] = i
+        C[i,0] = i *5
     for j in range(n+1):
-        C[0,j] = j
+        C[0,j] = j *5
 
     for i in range(1, m + 1):
         for j in range(1, n + 1):
-            if s[i-1] == t[j-1]:
-                substcost = 0
-            else:
-                substcost = 1
-            C[i,j] = min(C[i-1,j]+1, C[i,j-1]+1, C[i-1,j-1] + substcost)
+            substcost = -tb.blosum62[s[i-1]+t[j-1]]
+            minval = min(C[i-1,j]+5, C[i,j-1]+5, C[i-1,j-1] + substcost)
+            print(f'({i},{j}) {s[i-1]}, {t[j-1]}: {substcost} (min {minval})')
+            C[i,j] = minval
 
     return C, C[m,n]
 
@@ -36,9 +35,12 @@ def backtrack(C, s,t):
     j = len(t)
     s2 = ''
     t2 = ''
+    matches = 0
     while i!=0 or j != 0:
         minval = min(C[i-1,j-1], C[i-1,j], C[i,j-1])
         if minval == C[i-1,j-1]: # subst or match
+            if s[i-1] == t[j-1]:
+                matches += 1
             s2 = s[i-1] + s2
             t2 = t[j-1] + t2
             i-=1
@@ -52,7 +54,7 @@ def backtrack(C, s,t):
             t2 = t[j-1] + t2
             j -= 1
 
-    return s2, t2
+    return s2, t2, matches
 
 #
 # #
@@ -75,6 +77,9 @@ print(f's2 len: {len(s2)}')
 c, l = mineditlen(s1,s2)
 print('len:', l)
 print(c)
-s2, t2 = backtrack(c, s1, s2)
+s2, t2, m = backtrack(c, s1, s2)
+assert len(s2) == len(t2)
+print()
+print(len(s2) - m)
 print(s2)
 print(t2)
