@@ -12,19 +12,20 @@ sys.setrecursionlimit(10000)
 # Levenstein distance adapted to pythonm from
 # https://en.wikipedia.org/wiki/Levenshtein_distance
 def mineditlen(s, t):
+    gp = 5 # gap penalty
     m = len(s)
     n = len(t)
     C = np.ndarray((m+1, n+1))
     for i in range(m+1):
-        C[i,0] = i *5
+        C[i,0] = i * gp
     for j in range(n+1):
-        C[0,j] = j *5
+        C[0,j] = j * gp
 
     for i in range(1, m + 1):
         for j in range(1, n + 1):
             substcost = -tb.blosum62[s[i-1]+t[j-1]]
-            minval = min(C[i-1,j]+5, C[i,j-1]+5, C[i-1,j-1] + substcost)
-            print(f'({i},{j}) {s[i-1]}, {t[j-1]}: {substcost} (min {minval})')
+            minval = min(C[i-1,j] + gp, C[i,j-1] + gp, C[i-1,j-1] + substcost)
+            #print(f'({i},{j}) {s[i-1]}, {t[j-1]}: {substcost} (min {minval})')
             C[i,j] = minval
 
     return C, C[m,n]
@@ -76,7 +77,7 @@ print(f's1 len: {len(s1)}')
 print(f's2 len: {len(s2)}')
 c, l = mineditlen(s1,s2)
 print('len:', l)
-print(c)
+#print(c)
 s2, t2, m = backtrack(c, s1, s2)
 assert len(s2) == len(t2)
 print()
