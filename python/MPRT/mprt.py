@@ -54,11 +54,10 @@ lines = data.splitlines()
 f.close()
 
 for prot in lines:
-    #print(prot)
-    #protname = namecut(prot)
-    header, seq = getdata(prot)
+    protname = namecut(prot)
+    header, seq = getdata(protname)
     if header == '':
-        #print(f'No file for {prot}')
+        print(f'No file for {prot}')
         continue
     #name = getname(header)
     #if name != protname:
@@ -69,6 +68,8 @@ for prot in lines:
         string = seq[i:]
         if search(pattern, string):
             res += f'{i+1} '
+    print(prot)
     if res != '':
-        print(prot)
         print(res[:-1])
+    else:
+        print()
