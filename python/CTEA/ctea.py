@@ -9,7 +9,7 @@ sys.setrecursionlimit(10000)
 
 # https://rosalind.info/problems/ctea
 
-# Levenstein distance adapted to pythonm from
+# Levenstein distance adapted to python from
 # https://en.wikipedia.org/wiki/Levenshtein_distance
 def mineditlen(s, t):
     m = len(s)

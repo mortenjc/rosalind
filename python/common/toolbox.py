@@ -1,6 +1,7 @@
 
 # Toolbox is a set of utility methods to process DNA related sequences
 import strings
+import numpy as np
 
 #
 ## Lookup tables
@@ -196,3 +197,69 @@ def openframe(nuclseq):
                 else:
                     s += amino(codon)
     return ''
+
+
+
+def global_alignment(s1, s2, parms):
+    match, mismatch, gap = parms
+    print('costs', match, mismatch, gap)
+
+    def mineditlen(s, t):
+        gp = gap # gap penalty
+        m = len(s)
+        n = len(t)
+        C = np.ndarray((m+1, n+1))
+        for i in range(m+1):
+            C[i,0] = i * gp
+        for j in range(n+1):
+            C[0,j] = j * gp
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if  C[i-1,j-1] ==  C[i,j]:
+                    substcost = match
+                else:
+                    substcost = mismatch
+                minval = min(C[i-1,j] + gp, C[i,j-1] + gp, C[i-1,j-1] + substcost)
+                #print(f'({i},{j}) {s[i-1]}, {t[j-1]}: {substcost} (min {minval})')
+                C[i,j] = minval
+
+        print(C)
+        print('     ','  '.join(s2))
+        for i in range(len(s1)+1):
+            if i == 0:
+                print(' ', C[i])
+            else:
+                print(s1[i-1], C[i])
+        return C, C[m,n]
+
+
+    def backtrack(C, s,t):
+        i = len(s)
+        j = len(t)
+        s2 = ''
+        t2 = ''
+        matches = 0
+        while i!=0 or j != 0:
+            minval = min(C[i-1,j-1], C[i-1,j], C[i,j-1])
+            if minval == C[i-1,j-1]: # subst or match
+                if s[i-1] == t[j-1]:
+                    matches += 1
+                s2 = s[i-1] + s2
+                t2 = t[j-1] + t2
+                i-=1
+                j-=1
+            elif minval == C[i-1,j]: # ins?
+                s2 = s[i-1] + s2
+                t2 = '-' + t2
+                i -= 1
+            else:
+                s2 = '-' + s2
+                t2 = t[j-1] + t2
+                j -= 1
+
+        return s2, t2, matches
+    M, score = mineditlen(s1,s2)
+    a,b,matches = backtrack(M, s1, s2)
+    print(a)
+    print(b)

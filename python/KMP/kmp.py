@@ -1,4 +1,4 @@
-import sys, queue
+import sys
 from pathlib import Path
 sys.path.append('../common')
 import toolbox as tb
@@ -36,27 +36,58 @@ def KMP_search(s1, pat):
     else:
         return -1, j
 
-
-
-
 #
 # #
 #
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-n, names, strings = f.readfasta(lines)
+n, names, seqs = f.readfasta(lines)
 #all = Path(filename).read_text()
 
-s = strings[0]
+s = seqs[0]
 ls = len(s)
+print('len:', ls)
 p = [0] * ls
 
-i, l = KMP_search('CAGCATGGTATCACAGCAGAG', 'CAGCA')
-print(i, l)
 
-# for j in range(1,ls-1):
-#     s1 = s[0:ls-2]
-#     pat = s[j+1:]
-#     print(s1, pat)
-#     print(KMP_search(s[0:j], s[j+1:]))
+
+if False:
+    for k in range(1,ls):
+        if k % 1000 == 0:
+            print(k)
+        for j in range(1,k):
+            subs = s[j:k]
+
+            if s.find(subs) == 0:
+                print(j, k, s)
+                print(j,k, subs)
+                p[k] = len(subs)
+                break
+
+    print(p)
+    print('-------')
+
+
+
+def kmp_failure(s):
+    l = len(s)
+    i = 1
+    j = 0
+    f = [0] * l
+    while i < l:
+        if s[j] == s[i]:
+            f[i] = j + 1
+            i += 1
+            j += 1
+        elif j != 0:
+            j = f[j - 1]
+        else:
+            f[i] = 0
+            i += 1
+    return f
+
+
+res = kmp_failure(s)
+
+print(' '.join(map(str, res)))
