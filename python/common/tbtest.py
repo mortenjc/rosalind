@@ -31,3 +31,7 @@ assert r['U'] == 1
 assert tb.blosum62['AA'] == 4
 assert tb.blosum62['PG'] == tb.blosum62['GP']
 assert tb.blosum62['YY'] == 7
+
+
+assert tb.score('!!!') == 0
+assert tb.score('III') == 120

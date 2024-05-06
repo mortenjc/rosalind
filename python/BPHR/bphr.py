@@ -5,23 +5,8 @@ import files as f
 import strings as s
 import graphe
 
-# https://rosalind.info/problems/filt
-def qval(c):
-    return ord(c) - ord('!')
+# https://rosalind.info/problems/bphr
 
-
-def average_qual(qual):
-    sum = 0
-    for i in range(len(qual)):
-        sum += qval(qual[i])
-    return sum//len(qual)
-
-def count_below(qual, lim):
-    count = 0
-    for i in range(len(qual)):
-        if qval(qual[i]) < lim:
-            count += 1
-    return count
 
 #
 # #
@@ -32,10 +17,16 @@ lines = f.readlines(filename)
 n, names, seqs, qual = f.readfastq(lines[1:])
 
 q = int(lines[0])
-print(q)
+print(f'threshold {q}')
 
-res = 0
-for i, qstr in enumerate(qual):
-    avg = average_qual(qstr)
-    print(i, avg, count_below(qstr, ))
-print(res)
+lowq = 0
+seqlen = len(seqs[0])
+for j in range(seqlen):
+    qavg = 0
+    for i in range(n):
+        qavg += ord(qual[i][j]) - ord('!')
+    qavg = qavg / n
+    if qavg < q:
+        lowq += 1
+
+print(lowq)
