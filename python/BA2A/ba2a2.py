@@ -31,6 +31,11 @@ def diffn(s1, s2, n):
     return False
 
 
+def motEnum(Dna, k, d):
+    Patterns = set()
+
+
+
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
 #n, names, seqs, qual = f.readfastq(lines[1:])
@@ -38,21 +43,14 @@ lines = f.readlines(filename)
 k, d = map(int, lines[0].split())
 seqs = lines[1:]
 
-res = []
-seen = set()
-for l in seqs:
-    oldres = copy.deepcopy(res)
-    res = []
-    kmers = getkmers(l, k)
-    for kmer in kmers:
-        if len(oldres) == 0:
-            res.append(kmer)
-        else:
-            for r in oldres:
-                if not diffn(r, kmer, d) and not kmer in seen:
-                    res.append(kmer)
-                    seen.add(kmer)
+print(k,d)
+print(seqs)
 
-
-print(list(seen))
-print(' '.join(res))
+# MOTIFENUMERATION(Dna, k, d)
+#     Patterns ← an empty set
+#     for each k-mer Pattern in Dna
+#         for each k-mer Pattern’ differing from Pattern by at most d mismatches
+#             if Pattern' appears in each string from Dna with at most d mismatches
+#                 add Pattern' to Patterns
+#     remove duplicates from Patterns
+#     return Patterns
