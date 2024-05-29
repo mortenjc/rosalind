@@ -8,6 +8,7 @@ import random
 
 from graphe.graph import graph
 from graphe.graph import bfs
+from graphe import draw
 
 # iterator to produce a new incrementing number on every call
 def number():
@@ -70,6 +71,9 @@ def pathto(nodes, v, n1, n2):
     res = []
     bfs2 = bfs.BFSearch(G, nodes[n1])
     bfpath = bfs2.path_to(nodes[n2])
+    fig = draw.Draw()
+    fig.node_attr(label='')
+    fig.draw(G)
     return bfpath
 
 
