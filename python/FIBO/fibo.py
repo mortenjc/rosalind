@@ -1,9 +1,9 @@
 import sys, math
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
-
 
 
 def fib(n):
@@ -12,7 +12,7 @@ def fib(n):
     elif n == 0:
         return 0
     else:
-        return fib(n-1) + fib(n-2)
+        return fib(n - 1) + fib(n - 2)
 
 
 #
@@ -21,7 +21,7 @@ def fib(n):
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 assert len(lines) == 1

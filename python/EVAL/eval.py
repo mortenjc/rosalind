@@ -1,5 +1,6 @@
 import sys, queue
 from pathlib import Path
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -7,11 +8,11 @@ import strings as s
 import stats
 
 
-
 def gc2prob(gc):
-    pa = (1-gc)/2
-    pg = gc/2
-    return {'A':pa, 'T':pa, 'C':pg, 'G':pg}
+    pa = (1 - gc) / 2
+    pg = gc / 2
+    return {'A': pa, 'T': pa, 'C': pg, 'G': pg}
+
 
 #
 # #
@@ -20,12 +21,12 @@ def gc2prob(gc):
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
 n, names, strings = f.readfasta(lines)
-#all = Path(filename).read_text()
+# all = Path(filename).read_text()
 
 N = int(lines[0])
 s1 = lines[1]
 sl = len(s1)
-GC = list(map(float,list(lines[2].split(' '))))
+GC = list(map(float, list(lines[2].split(' '))))
 
 print(N)
 print(s1, sl)
@@ -40,6 +41,6 @@ for i in range(len(GC)):
     prob = 1.0
     for c in s1:
         prob *= p[c]
-    res.append(prob*substrs)
+    res.append(prob * substrs)
 
-print(' '.join(list(map(str,res))))
+print(' '.join(list(map(str, res))))

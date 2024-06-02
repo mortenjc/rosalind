@@ -1,4 +1,5 @@
 import sys, math
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -11,7 +12,7 @@ import strings as s
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 assert len(lines) == 2
@@ -22,4 +23,4 @@ d = int(lines[1].split()[3])
 
 mystr = lines[0]
 
-print(mystr[a:b+1]+' '+mystr[c:d+1])
+print(mystr[a : b + 1] + ' ' + mystr[c : d + 1])

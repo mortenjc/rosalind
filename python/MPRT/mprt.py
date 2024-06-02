@@ -1,4 +1,5 @@
 import sys, re
+
 sys.path.append('../common')
 import toolbox as tb
 import urllib.request
@@ -11,15 +12,17 @@ def namecut(longname):
     else:
         return longname[:i]
 
+
 def search(patt, string):
     res = patt.match(string)
     if res:
         return True
     return False
 
+
 # extract the canonical (?) name from the fasta header
 def getname(header):
-    #print(header)
+    # print(header)
     res = re.search('^.*\|(.+)\|.*', header)
     return res.group(1)
 
@@ -27,19 +30,20 @@ def getname(header):
 def getdata(protid):
     try:
         req = f'https://rest.uniprot.org/uniprotkb/{protid}.fasta'
-        #print(req)
+        # print(req)
         with urllib.request.urlopen(req) as response:
-           text = response.read()
-           text = text.decode('ascii').split('\n')
-           return text[0], "".join(text[1:])
+            text = response.read()
+            text = text.decode('ascii').split('\n')
+            return text[0], "".join(text[1:])
     except:
-        return '',''
+        return '', ''
+
 
 # problem: https://rosalind.info/problems/mprt
 # rest api for data: https://rest.uniprot.org/uniprotkb/B5ZC00.fasta
 
-#s N{P}[ST]{P}.
-#pattern = re.compile('N[^P][ST][^P]')
+# s N{P}[ST]{P}.
+# pattern = re.compile('N[^P][ST][^P]')
 pattern = re.compile('N[^P][ST][^P]')
 
 
@@ -59,9 +63,9 @@ for prot in lines:
     if header == '':
         print(f'No file for {prot}')
         continue
-    #name = getname(header)
-    #if name != protname:
-        #print(f'new name {protname}->{name}')
+    # name = getname(header)
+    # if name != protname:
+    # print(f'new name {protname}->{name}')
 
     res = ''
     for i in range(len(seq)):

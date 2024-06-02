@@ -1,11 +1,13 @@
 import sys
 from pathlib import Path
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
 
-A = {'A': 0, 'G' : 1, 'C': 2, 'T':3}
+A = {'A': 0, 'G': 1, 'C': 2, 'T': 3}
+
 
 def KMP(pat):
     R = 4
@@ -36,6 +38,7 @@ def KMP_search(s1, pat):
     else:
         return -1, j
 
+
 #
 # #
 #
@@ -43,7 +46,7 @@ def KMP_search(s1, pat):
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
 n, names, seqs = f.readfasta(lines)
-#all = Path(filename).read_text()
+# all = Path(filename).read_text()
 
 s = seqs[0]
 ls = len(s)
@@ -51,23 +54,21 @@ print('len:', ls)
 p = [0] * ls
 
 
-
 if False:
-    for k in range(1,ls):
+    for k in range(1, ls):
         if k % 1000 == 0:
             print(k)
-        for j in range(1,k):
+        for j in range(1, k):
             subs = s[j:k]
 
             if s.find(subs) == 0:
                 print(j, k, s)
-                print(j,k, subs)
+                print(j, k, subs)
                 p[k] = len(subs)
                 break
 
     print(p)
     print('-------')
-
 
 
 def kmp_failure(s):

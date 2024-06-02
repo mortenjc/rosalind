@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -7,9 +8,9 @@ import strings as s
 # https://rosalind.info/problems/long
 
 
-def ovlmerge(s1,s2):
+def ovlmerge(s1, s2):
     assert len(s2) > len(s1)
-    s1 += ' '*(len(s2) - len(s1))
+    s1 += ' ' * (len(s2) - len(s1))
     res = ''
     for i in range(len(s2)):
         if s2[i] == ' ':
@@ -75,10 +76,12 @@ def match(i, j, strings):
     cmp = strings[j]
 
     res = s.longest_overlap(ref, cmp)
-    if res[1] < len(ref)//2:
+    if res[1] < len(ref) // 2:
         return []
     else:
-        print(f'match {i}, {j}, len(ref) {len(ref)}, len(cmp) {len(cmp)} len(ss) {res[1]}')
+        print(
+            f'match {i}, {j}, len(ref) {len(ref)}, len(cmp) {len(cmp)} len(ss) {res[1]}'
+        )
         return [j, res[0]]
 
 
@@ -102,20 +105,21 @@ def findoverlaps(strings):
         if i == n:
             print('done')
             return res
-        elif (i in f) or (j in t): # skip already matched
+        elif (i in f) or (j in t):  # skip already matched
             i, j = inc(i, j, n)
-        elif i == j: # ship self check
+        elif i == j:  # ship self check
             i, j = inc(i, j, n)
         else:
             m = match(i, j, strings)
-            if m == []: # no match
+            if m == []:  # no match
                 i, j = inc(i, j, n)
-            else: # match
+            else:  # match
                 f.add(i)
                 t.add(j)
                 res[i] = m
                 i += 1
                 j = 0
+
 
 #
 # #

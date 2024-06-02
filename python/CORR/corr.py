@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -13,13 +14,14 @@ def point_mutation(seq1, seq2):
     index = -1
     for i in range(len(seq1)):
         if seq1[i] != seq2[i]:
-            #print(f'diff at {i}')
+            # print(f'diff at {i}')
             diffs += 1
             index = i
     if diffs == 1:
         return index
     else:
         return -1
+
 
 assert point_mutation('ATA', 'TTA') == 0
 assert point_mutation('ATA', 'TAT') == -1
@@ -64,12 +66,12 @@ print(bad)
 
 for b in bad:
     for g in good:
-        #print(f'test if {b} matches {g} or {tb.revcompl(g)}')
-        pmidx = point_mutation(g,b)
-        if  pmidx != -1:
+        # print(f'test if {b} matches {g} or {tb.revcompl(g)}')
+        pmidx = point_mutation(g, b)
+        if pmidx != -1:
             print(f'{b}->{g}')
             break
-        pmidx = point_mutation(tb.revcompl(g),b)
-        if  pmidx != -1:
+        pmidx = point_mutation(tb.revcompl(g), b)
+        if pmidx != -1:
             print(f'{b}->{tb.revcompl(g)}')
             break

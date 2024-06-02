@@ -1,4 +1,3 @@
-
 # Toolbox is a set of utility methods to process integer lists
 
 
@@ -34,7 +33,7 @@ def long_sseq(l, increase=True):
                     p[i] = j
     res = d[0]
     pos = 0
-    for i in range(1,n):
+    for i in range(1, n):
         if d[i] > res:
             res = d[i]
             pos = i

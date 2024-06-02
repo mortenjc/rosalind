@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -15,10 +16,11 @@ import copy
 def getkmers(s1, k):
     res = set()
     for i in range(len(s1) - k + 1):
-        kmer = s1[i:i+k]
+        kmer = s1[i : i + k]
         assert len(kmer) == k
         res.add(kmer)
     return list(res)
+
 
 def diffn(s1, s2, n):
     assert len(s1) == len(s2)
@@ -33,7 +35,7 @@ def diffn(s1, s2, n):
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, seqs, qual = f.readfastq(lines[1:])
+# n, names, seqs, qual = f.readfastq(lines[1:])
 
 k, d = map(int, lines[0].split())
 seqs = lines[1:]

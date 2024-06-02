@@ -1,5 +1,6 @@
 import sys, queue
 from pathlib import Path
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -10,6 +11,7 @@ from graphe.graph import graph
 from graphe.graph import bfs
 from graphe import draw
 
+
 # iterator to produce a new incrementing number on every call
 def number():
     num = 1
@@ -17,18 +19,19 @@ def number():
         yield num
         num = num + 1
 
+
 numb = number()
 
 
 # separate right node from left nodes
-def separate(s1):
+def separate(s1: str) -> str:
     assert s1[0] == '('
     end = s1.rfind(')')
-    return s1[1:end], s1[end+1:]
+    return s1[1:end], s1[end + 1 :]
 
 
 # run through left nodes and create dummy nodes when necessary
-def split(s1):
+def split(s1: str) -> list:
     par = 0
     nod = ''
     nodes = []
@@ -45,16 +48,16 @@ def split(s1):
         if c == ',':
             if par == 0:
                 if len(nod) == 0:
-                    nod = 'a'+str(next(numb))
+                    nod = 'a' + str(next(numb))
                 nodes.append(nod)
-                nod =''
+                nod = ''
                 continue
             else:
                 nod += c
         else:
             nod += c
     if len(nod) == 0:
-        nod = 'a'+str(next(numb))
+        nod = 'a' + str(next(numb))
     nodes.append(nod)
     return nodes
 
@@ -112,16 +115,18 @@ def netwick(tree):
             if lnode[0] == '(' and lnode[-1] == ')':
                 dn = adddummynode()
                 v.append([dn, rnode])
-                parsetree(lnode+dn)
+                parsetree(lnode + dn)
             elif lnode[0] == '(' and lnode[-1] != ')':
-                a,b = separate(lnode)
+                a, b = separate(lnode)
                 v.append([b, rnode])
                 parsetree(lnode)
             else:
                 addnode(lnode)
                 v.append([lnode, rnode])
+
     parsetree(tree)
     return v, nodes, nnames
+
 
 #
 # #
@@ -135,8 +140,8 @@ assert len(sys.argv) <= 2
 
 filename = f.filefromargv(sys.argv)
 
-#n, names, strings = f.readfasta(lines)
-#lines = f.readlines(filename)
+# n, names, strings = f.readfasta(lines)
+# lines = f.readlines(filename)
 all = Path(filename).read_text()
 
 
@@ -154,14 +159,21 @@ for nw in a:
     v, nodes, nnames = netwick(tree)
 
     G, res = pathto(nodes, v, dist[0], dist[1])
-    dists.append(str(len(res)-1))
+    dists.append(str(len(res) - 1))
     if plot:
         fig = draw.Draw()
         fig.set_names(nnames)
-        #fig.node_attr(label='')
-        #fig.node_attr()
-        fig.node_attr(width='0.3', height='0.3', shape='circle', style='filled',
-                  color='gray', fontcolor='black', fontsize='8')
+        # fig.node_attr(label='')
+        # fig.node_attr()
+        fig.node_attr(
+            width='0.3',
+            height='0.3',
+            shape='circle',
+            style='filled',
+            color='gray',
+            fontcolor='black',
+            fontsize='8',
+        )
         fig.draw(G, res)
 
 

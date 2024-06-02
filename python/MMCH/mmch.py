@@ -1,4 +1,5 @@
 import sys, queue, math
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -16,7 +17,7 @@ sys.setrecursionlimit(10000)
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
 n, names, seqs = f.readfasta(lines)
-#print(n, names, strings)
+# print(n, names, strings)
 
 assert n == 1
 
@@ -26,16 +27,16 @@ print(res)
 # If AU and CG counts do not match we first need to
 # do n choose k (max, max-min)
 
-minau = min(res['A'],res['U'])
-maxau = max(res['A'],res['U'])
-chooseau = math.comb(maxau, maxau-minau)
+minau = min(res['A'], res['U'])
+maxau = max(res['A'], res['U'])
+chooseau = math.comb(maxau, maxau - minau)
 
-mincg = min(res['C'],res['G'])
-maxcg = max(res['C'],res['G'])
-choosecg = math.comb(maxcg, maxcg-mincg)
+mincg = min(res['C'], res['G'])
+maxcg = max(res['C'], res['G'])
+choosecg = math.comb(maxcg, maxcg - mincg)
 
-print('AU:',minau, maxau, chooseau)
-print('CG:',mincg, maxcg, choosecg)
+print('AU:', minau, maxau, chooseau)
+print('CG:', mincg, maxcg, choosecg)
 
 # then there are k! possible pairs for each og AU and CG
-print(chooseau*choosecg*math.factorial(minau)*math.factorial(mincg))
+print(chooseau * choosecg * math.factorial(minau) * math.factorial(mincg))

@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -12,11 +13,9 @@ import strings as s
 #
 
 
-
-
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, seqs, qual = f.readfastq(lines[1:])
+# n, names, seqs, qual = f.readfastq(lines[1:])
 
 s1 = lines[0]
 alp = lines[2].split()
@@ -38,12 +37,12 @@ for i, l in enumerate(sts):
 
 p = 1.0
 for i in range(len(s1)):
-    #print(f'{s1[i]} in state {s2[i]}')
+    # print(f'{s1[i]} in state {s2[i]}')
     s = Dsts[s2[i]]
     v = Dalp[s1[i]]
-    #print(f'{v} {s}')
+    # print(f'{v} {s}')
     p = p * float(mtx[s][v])
 
 
-#print(mtx)
+# print(mtx)
 print(f'{p:.12}')

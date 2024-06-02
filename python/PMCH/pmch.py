@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -16,5 +17,5 @@ r = tb.aminostat(strings[0])
 assert r['A'] == r['U']
 assert r['C'] == r['G']
 
-res = math.factorial(r['A'])*math.factorial(r['C'])
+res = math.factorial(r['A']) * math.factorial(r['C'])
 print(res)

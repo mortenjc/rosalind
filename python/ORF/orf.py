@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -20,6 +21,7 @@ def orf(sequence):
             if tmp != '':
                 res.add(tmp)
     return res
+
 
 orgsequence = strings[0]
 res = orf(orgsequence)

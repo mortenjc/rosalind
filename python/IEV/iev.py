@@ -1,4 +1,5 @@
 import sys, re
+
 sys.path.append('../common')
 import toolbox as tb
 
@@ -7,7 +8,6 @@ if len(sys.argv) == 2:
     filename = sys.argv[1]
 else:
     filename = 'test.txt'
-
 
 
 probs = [1.0, 1.0, 1.0, 0.75, 0.5, 0.0]

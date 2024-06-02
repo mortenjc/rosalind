@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -7,7 +8,7 @@ import intlists as il
 # https://rosalind.info/problems/lgis
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 n = int(lines[0])
@@ -22,6 +23,6 @@ assert n == len(seq)
 res = il.long_sseq(il.listofint(seq))
 print(' '.join(il.listofstr(res)))
 
-#decreasing
+# decreasing
 res = il.long_sseq(il.listofint(seq), False)
 print(' '.join(il.listofstr(res)))

@@ -1,8 +1,10 @@
 import sys, math, re
+
 sys.path.append('../common')
-#import toolbox as tb
+# import toolbox as tb
 import files as f
-#import strings as s
+
+# import strings as s
 from collections import defaultdict
 
 # https://rosalind.info/problems/ba1e
@@ -14,7 +16,7 @@ from collections import defaultdict
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, seqs, qual = f.readfastq(lines[1:])
+# n, names, seqs, qual = f.readfastq(lines[1:])
 
 seq = lines[0]
 res = [0]

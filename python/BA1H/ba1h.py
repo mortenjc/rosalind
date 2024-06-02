@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -11,6 +12,7 @@ from collections import defaultdict
 # #
 #
 
+
 def hamming(s1, s2):
     assert len(s1) == len(s2)
     count = 0
@@ -22,7 +24,7 @@ def hamming(s1, s2):
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, seqs, qual = f.readfastq(lines[1:])
+# n, names, seqs, qual = f.readfastq(lines[1:])
 
 
 patt = lines[0]
@@ -31,8 +33,8 @@ seq = lines[1]
 hdist = int(lines[2])
 
 res = []
-for i in range(len(seq)-plen+1):
-    s1 = seq[i:i+plen]
+for i in range(len(seq) - plen + 1):
+    s1 = seq[i : i + plen]
     if hamming(s1, patt) <= hdist:
         res.append(str(i))
 

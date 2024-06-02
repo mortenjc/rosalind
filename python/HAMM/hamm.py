@@ -1,5 +1,3 @@
-
-
 # https://rosalind.info/problems/hamm/
 
 # opening the file

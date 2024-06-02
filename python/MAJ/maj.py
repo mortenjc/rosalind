@@ -1,5 +1,6 @@
 import sys
 from collections import defaultdict
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -12,10 +13,9 @@ def maj(line, n):
     count = defaultdict(int)
     for i in lst:
         count[i] += 1
-        if count[i] > n//2:
+        if count[i] > n // 2:
             return i
     return -1
-
 
 
 #
@@ -24,10 +24,10 @@ def maj(line, n):
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
-k, n = list(map(int,lines[0].split()))
+k, n = list(map(int, lines[0].split()))
 
 assert len(lines) == k + 1
 

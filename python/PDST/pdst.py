@@ -1,8 +1,10 @@
 import sys
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
+
 
 def dist(s1, s2):
     assert len(s1) == len(s2)
@@ -11,7 +13,8 @@ def dist(s1, s2):
     for i in range(n):
         if s1[i] != s2[i]:
             diff += 1
-    return 1.0*diff/n
+    return 1.0 * diff / n
+
 
 assert abs(dist('AB', 'AC') - 0.5) < 0.0001
 assert abs(dist('ABC', 'ACC') - 0.3333) < 0.0001

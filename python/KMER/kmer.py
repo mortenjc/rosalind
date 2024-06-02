@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -7,15 +8,16 @@ import stats as st
 
 # https://rosalind.info/problems/afrq
 
+
 def itoa(i, k, l):
     res = ''
     rem = i
-    for j in range(k-1,-1,-1):
-        #print(j, k**j)
-        c = rem//(k**j)
+    for j in range(k - 1, -1, -1):
+        # print(j, k**j)
+        c = rem // (k**j)
         res += l[c]
-        #print(j, rem, c, l[c])
-        rem = rem - c*(k**j)
+        # print(j, rem, c, l[c])
+        rem = rem - c * (k**j)
     return res
 
 
@@ -30,8 +32,8 @@ n, names, seqs = f.readfasta(lines)
 
 assert n == 1
 
-l = {0:'A', 1:'C', 2:'G', 3:'T'}
-#l = {'A':0, 'C':1, 'G':2, 'T':3}
+l = {0: 'A', 1: 'C', 2: 'G', 3: 'T'}
+# l = {'A':0, 'C':1, 'G':2, 'T':3}
 k = 4
 
 nmax = 4**4

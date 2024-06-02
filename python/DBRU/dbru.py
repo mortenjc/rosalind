@@ -1,5 +1,6 @@
 import sys, queue
 from pathlib import Path
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -20,8 +21,8 @@ def makepair(s1):
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, strings = f.readfasta(lines)
-#all = Path(filename).read_text()
+# n, names, strings = f.readfasta(lines)
+# all = Path(filename).read_text()
 
 res = set()
 for l in lines:
@@ -30,7 +31,7 @@ for l in lines:
     res.add(makepair(revl))
 
 lst = []
-for a,b in res:
+for a, b in res:
     lst.append(f'({a}, {b})')
 
 lst.sort()

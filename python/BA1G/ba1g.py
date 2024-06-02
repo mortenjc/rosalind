@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -13,7 +14,7 @@ from collections import defaultdict
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, seqs, qual = f.readfastq(lines[1:])
+# n, names, seqs, qual = f.readfastq(lines[1:])
 
 
 s1 = lines[0]

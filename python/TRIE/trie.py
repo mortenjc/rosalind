@@ -1,4 +1,5 @@
 import sys, queue
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -22,7 +23,6 @@ class Trie(object):
         self.n = 0
         self.root = TrieNode("", -1, self.n)
 
-
     def insert(self, word):
         node = self.root
 
@@ -36,9 +36,8 @@ class Trie(object):
                 node.children[char] = new_node
                 node = new_node
 
-        node.is_end = True # end of a word
+        node.is_end = True  # end of a word
         node.counter += 1
-
 
     def traverse(self):
         q = queue.Queue()
@@ -46,10 +45,11 @@ class Trie(object):
         while not q.empty():
             node = q.get(False)
             if node.prev != -1:
-                print(node.prev+1, node.n+1, node.char)
+                print(node.prev + 1, node.n + 1, node.char)
             for char in node.children:
                 newnode = node.children[char]
                 q.put(newnode)
+
 
 #
 # #
@@ -57,7 +57,7 @@ class Trie(object):
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 t = Trie()

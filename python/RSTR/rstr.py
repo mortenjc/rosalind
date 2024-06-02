@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -13,7 +14,7 @@ import stats as st
 #
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 assert len(lines) == 2
@@ -34,9 +35,9 @@ print(f'cat {cat}, cgc {cgc}')
 
 res = []
 
-newp = (GC/2)**cgc * (AT/2)**cat
-lg10newp = cgc * math.log10(GC/2) + cat * math.log10(AT/2)
-res.append(int(lg10newp*1000)/1000.0)
+newp = (GC / 2) ** cgc * (AT / 2) ** cat
+lg10newp = cgc * math.log10(GC / 2) + cat * math.log10(AT / 2)
+res.append(int(lg10newp * 1000) / 1000.0)
 print(newp)
 print(' '.join(map(str, res)))
 
@@ -44,6 +45,6 @@ print(' '.join(map(str, res)))
 p = newp
 res = 0.0
 for i in range(1, 50):
-    res += st.bern(N,i,p)
+    res += st.bern(N, i, p)
 
 print(res)

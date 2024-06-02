@@ -31,7 +31,7 @@ dataset.append(dsl)
 stats = []
 res = ""
 for i in range(len(dataset[0])):
-    cons = {'A' : 0, 'T' : 0, 'C' : 0, 'G' : 0}
+    cons = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
     for j in range(len(dataset)):
         line = dataset[j]
         cons[line[i]] += 1

@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -11,8 +12,8 @@ import strings as s
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
-#print(n, names, strings)
+# n, names, strings = f.readfasta(lines)
+# print(n, names, strings)
 lines = f.readlines(filename)
 
 assert len(lines) == 4
@@ -32,11 +33,11 @@ res = []
 while True:
     if i == len(a1):
         res.append(str(a2[j]))
-        j =+ 1
+        j = +1
     elif j == len(a2):
         res.append(str(a1[i]))
-        i =+ 1
-    #print(i,j, a1[i], a2[j])
+        i = +1
+    # print(i,j, a1[i], a2[j])
     elif a1[i] <= a2[j]:
         print(a1[i])
         res.append(str(a1[i]))

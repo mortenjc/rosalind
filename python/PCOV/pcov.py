@@ -1,5 +1,6 @@
 import sys, queue
 from pathlib import Path
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -13,14 +14,15 @@ def makepair(s1):
     assert len(a) == len(b)
     return (a, b)
 
+
 #
 # #
 #
 
 filename = f.filefromargv(sys.argv)
 lines = f.readlines(filename)
-#n, names, strings = f.readfasta(lines)
-#all = Path(filename).read_text()
+# n, names, strings = f.readfasta(lines)
+# all = Path(filename).read_text()
 
 res = set()
 for l in lines:
@@ -29,7 +31,7 @@ for l in lines:
     res.add(makepair(revl))
 
 loop = {}
-for a,b in res:
+for a, b in res:
     loop[a] = b
 
 start = lines[0][1:]
@@ -43,7 +45,7 @@ while True:
     if next == start:
         s1 = s1[:-1]
         break
-    #print(f'{" "*(i+1)}{next}')
+    # print(f'{" "*(i+1)}{next}')
     i += 1
 print()
 print(s1)

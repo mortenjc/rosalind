@@ -1,5 +1,5 @@
-
 # Collection of file utilities
+
 
 # Get filename from args, else use default
 def filefromargv(argv):
@@ -9,6 +9,7 @@ def filefromargv(argv):
         filename = 'test.txt'
     return filename
 
+
 # Read the file and return lines as a list
 def readlines(filename):
     f = open(filename, "r")
@@ -16,7 +17,6 @@ def readlines(filename):
     lines = data.splitlines()
     f.close()
     return lines
-
 
 
 # Read a file with multiple sequences in fasta format
@@ -32,12 +32,11 @@ def readfasta(lines):
                 strings.append(tmp)
             names.append(l[1:])
             files += 1
-            tmp =''
+            tmp = ''
         else:
             tmp += l
     strings.append(tmp)
     return files, names, strings
-
 
 
 # Read a lines with multiple sequences in fastq format
@@ -47,9 +46,9 @@ def readfastq(lines):
     seq = []
     qual = []
 
-    assert len(lines)%4 == 0
+    assert len(lines) % 4 == 0
 
-    n = len(lines)//4
+    n = len(lines) // 4
     for i in range(0, len(lines), 4):
         l0 = lines[i + 0]
         l1 = lines[i + 1]

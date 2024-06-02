@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -10,6 +11,7 @@ import strings as s
 #
 from Bio import Entrez
 
+
 def getfasta(name):
     Entrez.email = "mortenjc@jcapd.com"
     handle = Entrez.efetch(db="nucleotide", id=name, rettype="fasta")
@@ -20,8 +22,8 @@ def getfasta(name):
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
-#print(n, names, strings)
+# n, names, strings = f.readfasta(lines)
+# print(n, names, strings)
 lines = f.readlines(filename)
 assert len(lines) == 1
 assert len(lines[0].split()) == 2

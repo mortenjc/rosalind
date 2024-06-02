@@ -1,4 +1,5 @@
 import sys, math
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -11,23 +12,22 @@ def bsearch(arr, key):
 
     while True:
         if right == left:
-            if  arr[right] == key:
+            if arr[right] == key:
                 return right + 1
             else:
                 return -1
 
-        i = (left + right)//2
-        #print(f'[{left}, {i}, {right}]')
+        i = (left + right) // 2
+        # print(f'[{left}, {i}, {right}]')
         if arr[i] == key:
-            #print(f'match {i}')
+            # print(f'match {i}')
             return i + 1
         elif key < arr[i]:
-            #print(f'left')
+            # print(f'left')
             right = i
         else:
-            #print(f'right')
+            # print(f'right')
             left = i + 1
-
 
 
 #
@@ -35,7 +35,7 @@ def bsearch(arr, key):
 #
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 assert len(lines) == 4
@@ -50,4 +50,4 @@ res = []
 for key in keys:
     print('search for', key)
     res.append(bsearch(sorted, key))
-print(' '.join(list(map(str,res))))
+print(' '.join(list(map(str, res))))

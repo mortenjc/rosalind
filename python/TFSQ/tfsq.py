@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -22,11 +23,11 @@ for i in range(n):
     seq = seqs[i]
     lseq = len(seq)
 
-    w=70
+    w = 70
     start = 0
     end = min(len(seq), w)
     while start < lseq:
-        #print(start, end)
+        # print(start, end)
         assert len(seq[start:end]) <= w
         print(seq[start:end])
         start += w

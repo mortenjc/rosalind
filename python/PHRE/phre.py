@@ -1,4 +1,5 @@
 import sys, math, re
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
@@ -7,11 +8,13 @@ import stats as st
 
 # https://rosalind.info/problems/phre
 
+
 def avgqual(s):
     sum = 0
     for i in range(len(s)):
         sum += ord(s[i]) - ord('!')
-    return sum/len(s)
+    return sum / len(s)
+
 
 #
 # #

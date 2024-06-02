@@ -1,9 +1,9 @@
 import sys
+
 sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
-
 
 
 def addone(a, max):
@@ -12,7 +12,7 @@ def addone(a, max):
     while True:
         if i == n:
             break
-        #print(f'i {i} char {a[i]}')
+        # print(f'i {i} char {a[i]}')
         a[i] = a[i] + 1
         if a[i] < max:
             return a
@@ -26,10 +26,11 @@ def strtoint(a, ati):
     res = 0
     arev = a[::-1]
     for i in range(len(a)):
-        res += (n**i)*ati[arev[i]]
+        res += (n**i) * ati[arev[i]]
     return res
 
-tmp = {'D':1, 'N':2, 'A':3 }
+
+tmp = {'D': 1, 'N': 2, 'A': 3}
 assert strtoint('D', tmp) == 1
 assert strtoint('N', tmp) == 2
 assert strtoint('A', tmp) == 3
@@ -40,8 +41,8 @@ assert strtoint('DDD', tmp) == 13
 
 
 def gt(s, t, ati):
-    #print(s,t)
-    tp = t[:len(s)]
+    # print(s,t)
+    tp = t[: len(s)]
     if s == tp:
         return False
     else:
@@ -49,8 +50,10 @@ def gt(s, t, ati):
         i2 = strtoint(tp, ati)
         return i1 > i2
 
-#assert gt('DD', 'D', tmp)
-#assert not gt('DDD', 'DDD', tmp)
+
+# assert gt('DD', 'D', tmp)
+# assert not gt('DDD', 'DDD', tmp)
+
 
 def atostr(a, ita):
     res = ''
@@ -60,14 +63,13 @@ def atostr(a, ita):
     return res
 
 
-
 #
 # #
 #
 
 
 filename = f.filefromargv(sys.argv)
-#n, names, strings = f.readfasta(lines)
+# n, names, strings = f.readfasta(lines)
 lines = f.readlines(filename)
 
 assert len(lines) == 2
@@ -89,29 +91,29 @@ print(ita)
 print(n)
 
 orgstr = []
-for l in range(1,n+1):
-    #print(f'l {l}')
-    ntot = len(alp)**l
-    #print(f'ntot {ntot}')
+for l in range(1, n + 1):
+    # print(f'l {l}')
+    ntot = len(alp) ** l
+    # print(f'ntot {ntot}')
     a = [0 for i in range(l)]
     tmp = atostr(a, ita)[::-1]
-    #print(tmp)
+    # print(tmp)
     orgstr.append(tmp)
     for i in range(ntot - 1):
-        a = addone(a,len(alp))
+        a = addone(a, len(alp))
         tmp = atostr(a, ita)[::-1]
-        #print(tmp)
+        # print(tmp)
         orgstr.append(tmp)
 
-#print(orgstr)
+# print(orgstr)
 n2 = len(orgstr)
-#print(n2)
+# print(n2)
 
 print('sorting... please wait (use pypy and wait a little shorter)')
 
 
 for i in range(n2):
-    for j in range(i,n2):
+    for j in range(i, n2):
         s = orgstr[i]
         t = orgstr[j]
         if gt(s, t, ati):
