@@ -3,7 +3,6 @@ sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
-import graphe
 
 # https://rosalind.info/problems/rvco
 

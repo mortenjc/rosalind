@@ -3,7 +3,6 @@ sys.path.append('../common')
 import toolbox as tb
 import files as f
 import strings as s
-import graphe
 
 # https://rosalind.info/problems/bfs
 
@@ -14,7 +13,7 @@ lines = f.readlines(filename)
 
 from graphe.digraph import digraph
 from graphe.graph import bfs
-
+from graphe import draw
 
 
 V, E = list(map(int, lines[0].split()))
@@ -34,6 +33,6 @@ for i in range(DG.V):
 print('----------')
 print(' '.join(list(map(str, res))))
 
-#fig = draw.Draw()
-#fig.node_attr(label='')
-#fig.draw(G, bfpath)
+fig = draw.Draw()
+fig.node_attr(label='')
+fig.draw(DG, bfpath)

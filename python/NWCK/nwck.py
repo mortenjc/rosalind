@@ -8,6 +8,7 @@ import random
 
 from graphe.graph import graph
 from graphe.graph import bfs
+from graphe import draw
 
 # iterator to produce a new incrementing number on every call
 def number():
@@ -70,24 +71,28 @@ def pathto(nodes, v, n1, n2):
     res = []
     bfs2 = bfs.BFSearch(G, nodes[n1])
     bfpath = bfs2.path_to(nodes[n2])
-    return bfpath
+    return G, bfpath
 
 
 def netwick(tree):
     seen = set()
     nodes = {}
+    nnames = []
     v = []
 
     def addnode(nod):
         if not nod in seen:
             seen.add(nod)
             nodes[nod] = len(nodes)
+            nnames.append(nod)
 
     def adddummynode():
         dnode = 'n' + str(next(numb))
         if not dnode in seen:
-            nodes[dnode] = len(nodes)
             seen.add(dnode)
+            nodes[dnode] = len(nodes)
+            nnames.append(dnode)
+
         return dnode
 
     def parsetree(tree):
@@ -116,16 +121,28 @@ def netwick(tree):
                 addnode(lnode)
                 v.append([lnode, rnode])
     parsetree(tree)
-    return v, nodes
+    return v, nodes, nnames
 
 #
 # #
 #
+opt = 'False'
+if len(sys.argv) >= 3:
+    opt = sys.argv[2]
+    sys.argv = sys.argv[:2]
+
+assert len(sys.argv) <= 2
 
 filename = f.filefromargv(sys.argv)
+
 #n, names, strings = f.readfasta(lines)
 #lines = f.readlines(filename)
 all = Path(filename).read_text()
+
+
+plot = False
+if opt == 'True':
+    plot = True
 
 dists = []
 a = all.split('\n\n')
@@ -134,9 +151,18 @@ for nw in a:
     dist = nw.split('\n')[1].split()
     assert len(dist) == 2
 
-    v, nodes = netwick(tree)
+    v, nodes, nnames = netwick(tree)
 
-    res = pathto(nodes, v, dist[0], dist[1])
+    G, res = pathto(nodes, v, dist[0], dist[1])
     dists.append(str(len(res)-1))
+    if plot:
+        fig = draw.Draw()
+        fig.set_names(nnames)
+        #fig.node_attr(label='')
+        #fig.node_attr()
+        fig.node_attr(width='0.3', height='0.3', shape='circle', style='filled',
+                  color='gray', fontcolor='black', fontsize='8')
+        fig.draw(G, res)
+
 
 print(' '.join(dists))
