@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+Graph.gv
+Graph.gv.pdf

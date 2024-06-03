@@ -77,7 +77,7 @@ def pathto(nodes, v, n1, n2):
     return G, bfpath
 
 
-def netwick(tree):
+def newick(tree):
     seen = set()
     nodes = {}
     nnames = []
@@ -156,7 +156,7 @@ for nw in a:
     dist = nw.split('\n')[1].split()
     assert len(dist) == 2
 
-    v, nodes, nnames = netwick(tree)
+    v, nodes, nnames = newick(tree)
 
     G, res = pathto(nodes, v, dist[0], dist[1])
     dists.append(str(len(res) - 1))
