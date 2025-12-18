@@ -35,10 +35,7 @@ dna = lines[0]
 k,d = lines[1].split()
 k = int(k)
 d = int(d)
-# print('-------')
-# print(dna)
-# print(k, d)
-# print('-------')
+
 
 allkm = s.kmers(k)
 
@@ -49,13 +46,14 @@ for km in allkm:
     for j in range(len(dna)-len(km)):
         s1 = dna[j:j+k]
         if mismatches(s1, km) <= d:
-            idx.append(j)
             cnt += 1
-    #print(f'mismatches between {dna} and {km}: {cnt} ({idx})')
-    if cnt != 0:
-        res[km] = cnt
+    res[km] = cnt
 
-# print(res)
-maxval = max(res.values())
-m = [x for x in res if res[x] == maxval]
-print(' '.join(m))
+
+maxkm = {}
+for km in allkm:
+    maxkm[km] = res[km] + res[tb.revcompl(km)]
+
+maxval = max(maxkm.values())
+
+print(' '.join([x for x in maxkm if maxkm[x]==maxval]))

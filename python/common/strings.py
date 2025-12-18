@@ -1,6 +1,7 @@
 # Toolbox is a set of utility methods to process DNA related sequences
 
 import numpy as np
+import itertools as it
 
 
 # Reverse a string
@@ -156,3 +157,18 @@ def tofloat(str, sep=' '):
 # return a list of ints from a line
 def toint(str, sep=' '):
     return list(map(int, str.split(sep)))
+
+
+# Return all k-mers 'atoms' of k = length given a specific 
+# (nucleotide) alphabet. Bu 'atom' we mean
+# AAAT is a building blocl from which we can make
+# TAAA, ATAA, AATA, AAAT by permutating the elements
+def kmers(length, alphabet='ATCG'):
+    res = []
+    kms = [ ''.join(x) for x in it.combinations_with_replacement(alphabet, length)]
+    for km in kms:
+        for x in [''.join(x) for x in it.permutations(km)]:
+            if x not in res:
+                res.append(x)
+    return res
+
