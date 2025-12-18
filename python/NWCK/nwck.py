@@ -164,7 +164,9 @@ for nw in a:
         fig = draw.Draw()
         fig.set_names(nnames)
         # fig.node_attr(label='')
-        # fig.node_attr()
+        #fig.edge_attr(color='gray', arrowsize='0.2', penwidth='0.75')
+        fig.edge_attr(color='black', penwidth='1.95')
+        fig.node_attr()
         fig.node_attr(
             width='0.3',
             height='0.3',

@@ -47,7 +47,8 @@ def bestmatch(w):
         if diff < best:
             best = diff
             prt = p
-    print(prt, best)
+    if best > 0.1:
+        print('|poor|', best)
     return prt
 
 
@@ -64,17 +65,21 @@ n, names, seqs = f.readfasta(lines)
 
 total = float(lines[0])
 weights = list(map(float, lines[1:]))
-print(weights)
+
 
 assert len(weights) % 2 == 0
 
 protein = ''
+weights = weights[::-1]
 for i in range(len(weights) // 2 - 1):
     print('test', weights[i + 1], weights[i])
-    weight = weights[i + 1] - weights[i]
+    weight = weights[i] - weights[i+1]
     print(weight)
     protein += bestmatch(weight)
 
 print(protein)
 print(prtweight(protein))
 print(prtweight('KEKEP'))
+
+
+#print(weights)
