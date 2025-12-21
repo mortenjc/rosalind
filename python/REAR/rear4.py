@@ -96,15 +96,27 @@ assert len(lines)/3 == len(lines)//3
 for i in range(len(lines)//3):
     a = [int(x) for x in lines[i*3].split(' ')]
     b = [int(x) for x in lines[i*3+1].split(' ')]
-    print("a:   ", a)
-    print("b:   ", b)
-    print(bkpts(a))
-    print(bkpts(b))
     m = mkmap(a, b)
-    print("map: ", m)
+
+    ba, bba = bkpts(a)
+    bb, bbb = bkpts(b)
+    # print("a:   ", a)
+    # print("b:   ", b)
+    # print(ba)
+    # print(bb)
+    
+    # print("map: ", m)
     revs = findrevs(m)
     if not isordered(a):
         res = revs - 1
     else:
         res = revs
-    print(revs, res)
+
+    if bba == False and bbb == False:
+        print(res)
+    elif bba == True and bbb == True:
+        print(revs)
+    else:
+        print(res)
+
+#    print(revs, res)
